@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,10 @@ public class PlayerController : MonoBehaviour
         jump = GetComponent<Jump>();
         look = GetComponent<Look>();
     }
+    private void Start()
+    {
+        movement.moveState = MoveState.Walking;
+    }
 
     private void FixedUpdate()
     {
@@ -39,12 +44,26 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {           
             movement.curMovementInput = context.ReadValue<Vector2>();
-            animator.SetBool("isWalk", true);
+            if(movement.moveState == MoveState.Walking)
+            {
+                animator.SetBool("isWalk", true);
+            }
+            else
+            {
+                animator.SetBool("isRun", true);
+            }
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             movement.curMovementInput = Vector2.zero;
-            animator.SetBool("isWalk", false);
+            if (movement.moveState == MoveState.Walking)
+            {
+                animator.SetBool("isWalk", false);
+            }
+            else
+            {
+                animator.SetBool("isRun", false);
+            }           
         }
     }
 
@@ -60,5 +79,14 @@ public class PlayerController : MonoBehaviour
     public void OnLookInput(InputAction.CallbackContext context)
     {
         look.mouseDelta = context.ReadValue<Vector2>();
+    }
+
+    public IEnumerator SpeedUp(float duration)
+    {
+        movement.moveSpeed += 5;
+        movement.moveState = MoveState.Running;
+        yield return new WaitForSeconds(duration);
+        movement.moveState = MoveState.Walking;
+        movement.moveSpeed -= 5;
     }
 }
