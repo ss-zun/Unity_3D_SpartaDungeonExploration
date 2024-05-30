@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -63,10 +64,33 @@ public class Interaction : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && curInteractable != null)
         {
+            UseItem();
             curInteractable.OnInteract();
             curInteractGameObject = null;
             curInteractable = null;
-            promptText.gameObject.SetActive(false);
+            promptText.gameObject.SetActive(false);           
+        }
+    }
+
+    private void UseItem()
+    {
+        var curItem = curInteractGameObject.GetComponent<ItemObject>().data;
+
+        if (curItem.type == ItemType.Consumable)
+        {
+            var consumableItem = curItem.consumables;
+            foreach (var item in consumableItem)
+            {
+                switch (item.type)
+                {
+                    case ConsumableType.Health:
+                        gameObject.GetComponent<PlayerCondition>().Heal(item.value);
+                        break;
+                    case ConsumableType.MoveSpeed:
+                        StartCoroutine(gameObject.GetComponent<PlayerController>().SpeedUp(item.value));
+                        break;
+                }
+            }
         }
     }
 }

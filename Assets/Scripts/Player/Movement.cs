@@ -1,10 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum MoveState
+{
+    Walking,
+    Running
+}
+
 public class Movement : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
+    public MoveState moveState;
 
     [HideInInspector]
     public Vector2 curMovementInput;
