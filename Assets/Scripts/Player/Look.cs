@@ -29,7 +29,7 @@ public class Look : MonoBehaviour
 
         transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
 
-        cameraContainer.position = transform.position - (cameraContainer.rotation * new Vector3(0f, 0f, 2f));
+        cameraContainer.position = transform.position - (cameraContainer.rotation * new Vector3(0f, 0f, 4f));
         cameraContainer.position += new Vector3(0f, 1.7f, 0f);
     }
 }
