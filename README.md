@@ -1,5 +1,13 @@
 # Unity_3D_SpartaDungeonExploration
 스파르타코딩클럽 - [스파르타 던전 탐험] 3D 프로젝트
+# 클래스 설계
+![image](https://github.com/ss-zun/Unity_3D_SpartaDungeonExploration/assets/66246253/40668fbb-8492-4793-a030-257cd2943a2a)
+
+
+# 시연 영상
+https://youtu.be/002pNoGjeq8
+
+
 # 구현된 사항들
 ## 필수요구사항
     1. 기본 이동 및 점프 `Input System`, `Rigidbody ForceMode`
@@ -29,10 +37,6 @@
         - 예) 스피드 부스트(Speed Boost): 플레이어의 이동 속도를 일정 시간 동안 증가시킴.
         더블 점프(Double Jump): 일정 시간 동안 두 번 점프할 수 있게 함.
         무적(Invincibility): 일정 시간 동안 적의 공격을 받지 않도록 함.
-
-## 시연 영상
-https://youtu.be/002pNoGjeq8
-
 
 ## 남은 구현
     1. 추가 UI
