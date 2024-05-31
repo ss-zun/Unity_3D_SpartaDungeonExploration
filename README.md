@@ -31,7 +31,7 @@
         무적(Invincibility): 일정 시간 동안 적의 공격을 받지 않도록 함.
 
 ## 시연 영상
-
+https://youtu.be/002pNoGjeq8
 
 
 ## 남은 구현
