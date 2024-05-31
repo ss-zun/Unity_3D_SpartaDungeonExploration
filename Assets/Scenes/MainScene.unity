@@ -2883,7 +2883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1766620435047824356, guid: a1cbad4869cb3344b8e3f616aac87ee2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 5801693340322447187, guid: a1cbad4869cb3344b8e3f616aac87ee2, type: 3}
       propertyPath: promptText

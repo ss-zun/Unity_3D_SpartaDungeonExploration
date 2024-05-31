@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         movement.moveState = MoveState.Walking;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void FixedUpdate()
@@ -44,12 +45,14 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {           
             movement.curMovementInput = context.ReadValue<Vector2>();
-            if(movement.moveState == MoveState.Walking)
+            if (movement.moveState == MoveState.Walking)
             {
+                animator.SetBool("isRun", false);
                 animator.SetBool("isWalk", true);
             }
-            else
+            else if (movement.moveState == MoveState.Running)
             {
+                animator.SetBool("isWalk", false);
                 animator.SetBool("isRun", true);
             }
         }
@@ -57,13 +60,13 @@ public class PlayerController : MonoBehaviour
         {
             movement.curMovementInput = Vector2.zero;
             if (movement.moveState == MoveState.Walking)
-            {
+            {               
                 animator.SetBool("isWalk", false);
             }
-            else
+            else if(movement.moveState == MoveState.Running)
             {
                 animator.SetBool("isRun", false);
-            }           
+            }
         }
     }
 
