@@ -28,6 +28,11 @@ public class PlayerCondition : MonoBehaviour, IDamagable
         health.Add(amount);
     }
 
+    public void UseStamina()
+    {
+        stamina.Subtract(stamina.passiveValue*5);
+    }
+
     private void Die()
     {
         Debug.Log("플레이어가 죽었다.");
