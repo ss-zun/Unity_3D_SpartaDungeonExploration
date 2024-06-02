@@ -1,6 +1,7 @@
 # Unity_3D_SpartaDungeonExploration
 스파르타코딩클럽 - [스파르타 던전 탐험] 3D 프로젝트
 # 클래스 설계
+![image](https://github.com/ss-zun/Unity_3D_SpartaDungeonExploration/assets/66246253/b0d4a368-eacb-4538-bc47-7b57dc23eaa0)
 
 
 # 시연 영상
