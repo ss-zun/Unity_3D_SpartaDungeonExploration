@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Climb : MonoBehaviour
 {
+    public float climbSpeed = 1.0f;
     private GameObject ropeSegment;
     private float ropeHeight;
 
@@ -14,7 +15,6 @@ public class Climb : MonoBehaviour
     }
     public void ClimbRope(float direction, Rigidbody rb)
     {
-        float climbSpeed = 1.0f;
         if (direction != 0)
         {
             Vector3 climbDirection = new Vector3(0, direction * climbSpeed * Time.deltaTime, 0);
