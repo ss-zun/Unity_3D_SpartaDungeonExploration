@@ -28,9 +28,9 @@ public class PlayerCondition : MonoBehaviour, IDamagable
         health.Add(amount);
     }
 
-    public void UseStamina()
+    public void UseStamina(float amount)
     {
-        stamina.Subtract(stamina.passiveValue*5);
+        stamina.Subtract(stamina.passiveValue*amount);
     }
 
     private void Die()

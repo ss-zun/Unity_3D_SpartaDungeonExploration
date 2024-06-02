@@ -19,6 +19,7 @@ public class Climb : MonoBehaviour
         {
             Vector3 climbDirection = new Vector3(0, direction * climbSpeed * Time.deltaTime, 0);
             rb.MovePosition(transform.position + climbDirection);
+            gameObject.GetComponent<PlayerCondition>().UseStamina(Time.deltaTime * 5.0f);
 
             if (transform.position.y >= ropeSegment.transform.position.y + (ropeHeight / 2))
             {
