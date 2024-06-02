@@ -81,7 +81,6 @@ public class Interaction : MonoBehaviour
             }
             else if(curItem.type == ItemType.Attachable)
             {
-                
                 controller.movement.moveState = MoveState.Climbing;
                 controller.climb.SetRopeSegment(curInteractGameObject);
             }

@@ -9,7 +9,6 @@ public class FootBoard : MonoBehaviour
     public float speed = 2f;
 
     private Vector3 nextPosition;
-    private Rigidbody playerRigidbody; // 플레이어 Rigidbody
 
     void Start()
     {
