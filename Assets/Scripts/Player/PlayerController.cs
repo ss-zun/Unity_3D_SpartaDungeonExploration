@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger("isJump");
             rb.AddForce(Vector2.up * jump.jumpForce, ForceMode.Impulse);
+            transform.GetComponent<PlayerCondition>().UseStamina();
         }
     }
 
