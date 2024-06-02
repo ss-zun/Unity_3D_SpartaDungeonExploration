@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class PlayerController : MonoBehaviour
 {
-    private Movement movement;
+    public Movement movement;
     private Jump jump;
     private Look look;
+    public Climb climb;
 
     private Rigidbody rb;
     private Animator animator;
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
         movement = GetComponent<Movement>();
         jump = GetComponent<Jump>();
         look = GetComponent<Look>();
+        climb = GetComponent<Climb>();
     }
     private void Start()
     {
@@ -28,7 +31,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        movement.Move(rb);
+        if (movement.moveState == MoveState.Climbing)
+        {
+            climb.ClimbRope(movement.curMovementInput.y, rb);
+        }
+        else
+        {
+            movement.Move(rb);
+        }
     }
 
     private void LateUpdate()
@@ -42,30 +52,28 @@ public class PlayerController : MonoBehaviour
 
     public void OnMoveInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
-        {           
-            movement.curMovementInput = context.ReadValue<Vector2>();
-            if (movement.moveState == MoveState.Walking)
-            {
-                animator.SetBool("isRun", false);
-                animator.SetBool("isWalk", true);
-            }
-            else if (movement.moveState == MoveState.Running)
-            {
-                animator.SetBool("isWalk", false);
-                animator.SetBool("isRun", true);
-            }
-        }
-        else if (context.phase == InputActionPhase.Canceled)
+        if (context.phase == InputActionPhase.Performed || context.phase == InputActionPhase.Canceled)
         {
-            movement.curMovementInput = Vector2.zero;
-            if (movement.moveState == MoveState.Walking)
-            {               
-                animator.SetBool("isWalk", false);
-            }
-            else if(movement.moveState == MoveState.Running)
+            movement.curMovementInput = context.ReadValue<Vector2>();
+            switch (movement.moveState)
             {
-                animator.SetBool("isRun", false);
+                case MoveState.Walking:
+                    animator.SetBool("isRun", false);
+                    animator.SetBool("isClimb", false);
+                    animator.SetBool("isWalk", context.phase == InputActionPhase.Performed);
+                    break;
+                case MoveState.Running:
+                    animator.SetBool("isWalk", false);
+                    animator.SetBool("isClimb", false);
+                    animator.SetBool("isRun", context.phase == InputActionPhase.Performed);
+                    break;
+                case MoveState.Climbing:
+                    animator.SetBool("isWalk", false);
+                    animator.SetBool("isRun", false);
+                    animator.SetBool("isClimb", true);
+                    rb.useGravity = false;
+                    rb.velocity = Vector3.zero;
+                    break;
             }
         }
     }

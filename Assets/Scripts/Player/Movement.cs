@@ -4,7 +4,8 @@ using UnityEngine.InputSystem;
 public enum MoveState
 {
     Walking,
-    Running
+    Running,
+    Climbing
 }
 
 public class Movement : MonoBehaviour

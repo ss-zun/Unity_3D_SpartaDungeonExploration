@@ -22,6 +22,15 @@ public class Interaction : MonoBehaviour
     public TextMeshProUGUI promptText;
     private Camera camera;
 
+    private PlayerCondition condition;
+    private PlayerController controller;
+
+    private void Awake()
+    {
+        condition = gameObject.GetComponent<PlayerCondition>();
+        controller = gameObject.GetComponent<PlayerController>();
+    }
+
     void Start()
     {
         camera = Camera.main;
@@ -64,11 +73,20 @@ public class Interaction : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && curInteractable != null)
         {
-            UseItem();
-            curInteractable.OnInteract();
+            var curItem = curInteractGameObject.GetComponent<ItemObject>().data;
+            if (curItem.type == ItemType.Consumable)
+            {
+                UseItem();
+                curInteractable.OnInteract();
+            }
+            else if(curItem.type == ItemType.Attachable)
+            {
+                controller.movement.moveState = MoveState.Climbing;
+                controller.climb.SetRopeSegment(curInteractGameObject);
+            }
             curInteractGameObject = null;
             curInteractable = null;
-            promptText.gameObject.SetActive(false);           
+            promptText.gameObject.SetActive(false);
         }
     }
 
@@ -84,10 +102,10 @@ public class Interaction : MonoBehaviour
                 switch (item.type)
                 {
                     case ConsumableType.Health:
-                        gameObject.GetComponent<PlayerCondition>().Heal(item.value);
+                        condition.Heal(item.value);
                         break;
                     case ConsumableType.MoveSpeed:
-                        StartCoroutine(gameObject.GetComponent<PlayerController>().SpeedUp(item.value));
+                        StartCoroutine(controller.SpeedUp(item.value));
                         break;
                 }
             }

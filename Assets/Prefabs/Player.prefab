@@ -2739,7 +2739,7 @@ Transform:
   m_GameObject: {fileID: 3097385355289774084}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7, z: -2}
+  m_LocalPosition: {x: 0, y: 1.7, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8425,6 +8425,7 @@ GameObject:
   - component: {fileID: 1160851369223512365}
   - component: {fileID: 5801693340322447187}
   - component: {fileID: 8062485509592112356}
+  - component: {fileID: 4005152458149449935}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -8621,6 +8622,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b0d46fbecd0144eb6d4a1cdd5a08f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movement: {fileID: 0}
+  climb: {fileID: 0}
 --- !u!114 &6937392025710460714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8648,6 +8651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
+  moveState: 0
   curMovementInput: {x: 0, y: 0}
 --- !u!114 &1160851369223512365
 MonoBehaviour:
@@ -8701,6 +8705,18 @@ MonoBehaviour:
   lookSensitivity: 0.1
   canLook: 1
   mouseDelta: {x: 0, y: 0}
+--- !u!114 &4005152458149449935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8519603411730404736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff281e0f1a819a4cb3aa04e65f4bd7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8570447487647007291
 GameObject:
   m_ObjectHideFlags: 0
