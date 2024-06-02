@@ -5,7 +5,7 @@
 
 
 # 시연 영상
-
+https://youtu.be/4n8typ7aLtU
 
 # 구현된 사항들
 ## 필수요구사항
